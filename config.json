@@ -1,0 +1,162 @@
+{
+  "name": "scrypted-animal-detection-coreml",
+  "version": "1.0.0",
+  "description": "CoreML animal detection model for Scrypted NVR — detects 20 animal classes with YOLOv8 backbone",
+  "author": "scrypted-animal-detection",
+  "license": "MIT",
+
+  "model": {
+    "name": "AnimalDetectorV1",
+    "filename": "AnimalDetector.mlpackage",
+    "input_size": [640, 640],
+    "input_name": "image",
+    "output_names": ["var_1062", "var_1063"],
+    "confidence_threshold": 0.40,
+    "iou_threshold": 0.45,
+    "max_detections": 100,
+    "compute_units": "cpuAndNeuralEngine"
+  },
+
+  "classes": [
+    "bear",
+    "bird",
+    "cat",
+    "cow",
+    "deer",
+    "dog",
+    "elephant",
+    "fox",
+    "horse",
+    "monkey",
+    "mouse",
+    "raccoon",
+    "rabbit",
+    "sheep",
+    "skunk",
+    "squirrel",
+    "wolf",
+    "coyote",
+    "turkey",
+    "duck"
+  ],
+
+  "class_colors": {
+    "bear":     "#8B0000",
+    "bird":     "#1E90FF",
+    "cat":      "#FF69B4",
+    "cow":      "#8B4513",
+    "deer":     "#228B22",
+    "dog":      "#FFA500",
+    "elephant": "#708090",
+    "fox":      "#FF4500",
+    "horse":    "#D2691E",
+    "monkey":   "#9ACD32",
+    "mouse":    "#A9A9A9",
+    "raccoon":  "#4B0082",
+    "rabbit":   "#FFD700",
+    "sheep":    "#F5F5F5",
+    "skunk":    "#2F4F4F",
+    "squirrel": "#CD853F",
+    "wolf":     "#6A5ACD",
+    "coyote":   "#DAA520",
+    "turkey":   "#B8860B",
+    "duck":     "#008B8B"
+  },
+
+  "scrypted": {
+    "plugin_id": "scrypted-animal-detection-coreml",
+    "interfaces": [
+      "ObjectDetection",
+      "Settings"
+    ],
+    "nativeId": null,
+    "settings": {
+      "confidence_threshold": {
+        "type": "number",
+        "title": "Detection Confidence",
+        "description": "Minimum confidence score (0.0–1.0) required to report a detection.",
+        "default": 0.40,
+        "min": 0.1,
+        "max": 1.0,
+        "step": 0.01
+      },
+      "iou_threshold": {
+        "type": "number",
+        "title": "NMS IoU Threshold",
+        "description": "Intersection-over-Union threshold for non-maximum suppression.",
+        "default": 0.45,
+        "min": 0.1,
+        "max": 1.0,
+        "step": 0.01
+      },
+      "compute_units": {
+        "type": "string",
+        "title": "CoreML Compute Units",
+        "description": "Apple silicon compute units to use for inference.",
+        "default": "cpuAndNeuralEngine",
+        "choices": ["cpuOnly", "cpuAndGPU", "all", "cpuAndNeuralEngine"]
+      },
+      "enabled_classes": {
+        "type": "array",
+        "title": "Enabled Animal Classes",
+        "description": "Which animal classes to report. Leave empty to enable all.",
+        "default": [],
+        "items": {
+          "type": "string"
+        }
+      },
+      "min_box_area": {
+        "type": "number",
+        "title": "Minimum Bounding Box Area (px²)",
+        "description": "Detections with bounding box area below this value are ignored.",
+        "default": 400,
+        "min": 0,
+        "max": 50000,
+        "step": 100
+      }
+    }
+  },
+
+  "training": {
+    "base_model": "yolov8n.pt",
+    "dataset": "custom_animals",
+    "epochs": 100,
+    "imgsz": 640,
+    "batch": 16,
+    "patience": 20,
+    "optimizer": "AdamW",
+    "lr0": 0.001,
+    "lrf": 0.01,
+    "momentum": 0.937,
+    "weight_decay": 0.0005,
+    "augment": true,
+    "mosaic": 1.0,
+    "mixup": 0.1,
+    "copy_paste": 0.1,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "degrees": 10.0,
+    "translate": 0.1,
+    "scale": 0.5,
+    "fliplr": 0.5,
+    "flipud": 0.0
+  },
+
+  "export": {
+    "format": "coreml",
+    "nms": true,
+    "half": false,
+    "simplify": true,
+    "opset": 17
+  },
+
+  "meta": {
+    "created": "2026-04-25",
+    "framework": "YOLOv8 → CoreML",
+    "target_platform": "macOS 13+ / iOS 16+",
+    "apple_silicon": true,
+    "neural_engine": true,
+    "notes": "Run scripts/train.py to train, then scripts/export_coreml.py to convert. Drop the resulting .mlpackage into model/ and restart the Scrypted plugin."
+  }
+}

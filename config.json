@@ -1,0 +1,127 @@
+{
+  "name": "scrypted-animal-detection-coreml",
+  "version": "1.0.0",
+  "description": "CoreML animal detection plugin for Scrypted NVR — YOLOv8n backbone, 20 classes, Apple Neural Engine",
+
+  "model": {
+    "name": "AnimalDetectorV1",
+    "coreml_file": "AnimalDetector.mlpackage",
+    "onnx_file": "AnimalDetector.onnx",
+    "pytorch_file": "yolov8n_base.pt",
+    "input_size": [640, 640],
+    "input_name": "images",
+    "output_name": "output0",
+    "confidence_threshold": 0.40,
+    "iou_threshold": 0.45,
+    "max_detections": 100,
+    "compute_units": "cpuAndNeuralEngine"
+  },
+
+  "classes": [
+    "bear", "bird", "cat", "cow", "deer", "dog",
+    "elephant", "fox", "horse", "monkey", "mouse",
+    "raccoon", "rabbit", "sheep", "skunk", "squirrel",
+    "wolf", "coyote", "turkey", "duck"
+  ],
+
+  "class_colors": {
+    "bear":     "#8B0000",
+    "bird":     "#1E90FF",
+    "cat":      "#FF69B4",
+    "cow":      "#8B4513",
+    "deer":     "#228B22",
+    "dog":      "#FFA500",
+    "elephant": "#708090",
+    "fox":      "#FF4500",
+    "horse":    "#D2691E",
+    "monkey":   "#9ACD32",
+    "mouse":    "#A9A9A9",
+    "raccoon":  "#4B0082",
+    "rabbit":   "#FFD700",
+    "sheep":    "#CCCCCC",
+    "skunk":    "#2F4F4F",
+    "squirrel": "#CD853F",
+    "wolf":     "#6A5ACD",
+    "coyote":   "#DAA520",
+    "turkey":   "#B8860B",
+    "duck":     "#008B8B"
+  },
+
+  "training": {
+    "base_model": "yolov8n.pt",
+    "epochs": 100,
+    "imgsz": 640,
+    "batch": 16,
+    "patience": 20,
+    "optimizer": "AdamW",
+    "lr0": 0.001,
+    "lrf": 0.01,
+    "momentum": 0.937,
+    "weight_decay": 0.0005,
+    "augment": true,
+    "mosaic": 1.0,
+    "mixup": 0.1,
+    "copy_paste": 0.1,
+    "hsv_h": 0.015,
+    "hsv_s": 0.7,
+    "hsv_v": 0.4,
+    "degrees": 10.0,
+    "translate": 0.1,
+    "scale": 0.5,
+    "fliplr": 0.5,
+    "flipud": 0.0
+  },
+
+  "export": {
+    "format": "coreml",
+    "nms": true,
+    "half": false,
+    "simplify": true,
+    "opset": 17
+  },
+
+  "scrypted": {
+    "interfaces": ["ObjectDetection", "Settings"],
+    "settings": {
+      "confidence_threshold": {
+        "type": "number",
+        "title": "Detection Confidence",
+        "description": "Minimum confidence (0.0–1.0) to report a detection.",
+        "default": 0.40, "min": 0.1, "max": 1.0, "step": 0.01
+      },
+      "iou_threshold": {
+        "type": "number",
+        "title": "NMS IoU Threshold",
+        "description": "IoU threshold for non-maximum suppression.",
+        "default": 0.45, "min": 0.1, "max": 1.0, "step": 0.01
+      },
+      "compute_units": {
+        "type": "string",
+        "title": "CoreML Compute Units",
+        "description": "Apple silicon compute units for inference.",
+        "default": "cpuAndNeuralEngine",
+        "choices": ["cpuOnly", "cpuAndGPU", "all", "cpuAndNeuralEngine"]
+      },
+      "enabled_classes": {
+        "type": "array",
+        "title": "Enabled Classes",
+        "description": "Classes to report. Empty = all 20.",
+        "default": []
+      },
+      "min_box_area": {
+        "type": "number",
+        "title": "Minimum Box Area (px²)",
+        "description": "Ignore detections smaller than this.",
+        "default": 400, "min": 0, "max": 50000, "step": 100
+      }
+    }
+  },
+
+  "meta": {
+    "created": "2026-04-26",
+    "framework": "YOLOv8n → ONNX → CoreML",
+    "target_platform": "macOS 13+ / iOS 16+",
+    "apple_silicon": true,
+    "neural_engine": true
+  }
+}

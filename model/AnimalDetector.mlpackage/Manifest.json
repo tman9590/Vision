@@ -1,0 +1,12 @@
+{
+  "fileFormatVersion": "1.0.0",
+  "itemInfoEntries": {
+    "com.apple.CoreML/model.mlmodel": {
+      "author": "com.apple.CoreML",
+      "description": "CoreML Model Specification",
+      "itemInfoEntries": {},
+      "path": "com.apple.CoreML/model.mlmodel"
+    }
+  },
+  "rootModelIdentifier": "com.apple.CoreML/model.mlmodel"
+}

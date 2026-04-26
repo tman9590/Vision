@@ -1,0 +1,23 @@
+{
+  "name": "scrypted-animal-detection-coreml",
+  "version": "1.0.0",
+  "description": "CoreML animal detection plugin for Scrypted NVR — YOLOv8n, 20 classes, Apple Neural Engine",
+  "author": "scrypted-animal-detection-coreml",
+  "license": "MIT",
+  "scrypted": {
+    "name": "Animal Detection (CoreML)",
+    "runtime": "python",
+    "main": "plugin/main.py",
+    "description": "Detects 20 animal classes in camera feeds using YOLOv8n on Apple Silicon Neural Engine.",
+    "interfaces": ["ObjectDetection", "Settings"],
+    "devices": []
+  },
+  "engines": { "scrypted": ">=0.3.0" },
+  "dependencies": {
+    "coremltools": ">=7.0",
+    "ultralytics": ">=8.0",
+    "opencv-python-headless": ">=4.8",
+    "numpy": ">=1.24",
+    "onnxruntime": ">=1.16"
+  }
+}

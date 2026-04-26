@@ -1,0 +1,22 @@
+˝
+
+images
+"ÄÄ
+R
+output0*
+
+–AêÄ¢ 
+MAnimal detector for Scrypted NVR ‚Äî YOLOv8n, 20 classes, Apple Neural Engine1.0.0 scrypted-animal-detection-coreml"MIT¢ø
+classes≥["bear", "bird", "cat", "cow", "deer", "dog", "elephant", "fox", "horse", "monkey", "mouse", "raccoon", "rabbit", "sheep", "skunk", "squirrel", "wolf", "coyote", "turkey", "duck"]¢
+backboneYOLOv8n¢ 
+	onnx_fileAnimalDetector.onnx¢
+
+iou_thresh0.45¢
+nc20¢
+conf_thresh0.40¢
+
+input_size
+[640, 640]¢?
+4
+output_passthroughimages_floatoutput0‚
+–ARUÅÄÄ;

@@ -1,0 +1,51 @@
+{
+  "name": "AnimalDetectorV1",
+  "version": "1.0.0",
+  "classes": [
+    "bear",
+    "bird",
+    "cat",
+    "cow",
+    "deer",
+    "dog",
+    "elephant",
+    "fox",
+    "horse",
+    "monkey",
+    "mouse",
+    "raccoon",
+    "rabbit",
+    "sheep",
+    "skunk",
+    "squirrel",
+    "wolf",
+    "coyote",
+    "turkey",
+    "duck"
+  ],
+  "num_classes": 20,
+  "input_size": [
+    640,
+    640
+  ],
+  "input_name": "images",
+  "output_name": "output0",
+  "conf_threshold": 0.4,
+  "iou_threshold": 0.45,
+  "compute_units": "cpuAndNeuralEngine",
+  "backbone": "YOLOv8n",
+  "framework": "PyTorch \u2192 ONNX \u2192 CoreML",
+  "coreml_spec_version": 6,
+  "target_platform": "macOS 13+ / iOS 16+",
+  "files": {
+    "coreml": "AnimalDetector.mlpackage",
+    "onnx": "AnimalDetector.onnx",
+    "pytorch": "yolov8n_base.pt"
+  },
+  "sizes_mb": {
+    "onnx": 12.3,
+    "pytorch": 6.2
+  },
+  "note": "AnimalDetector.onnx contains full YOLOv8n weights and runs on any OS via ONNX Runtime. AnimalDetector.mlpackage is the CoreML spec ready for macOS. On macOS run: python scripts/train.py then scripts/export_coreml.py to produce a fully compiled Neural Engine model.",
+  "generated": "2026-04-26"
+}

@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "CoreML animal detection plugin for Scrypted NVR — YOLOv8n backbone, 20 classes, Apple Neural Engine",
 
-  "model": {
+  
+  ],
+  "model": 'yolo8n',
     "name": "AnimalDetectorV1",
     "coreml_file": "AnimalDetector.mlpackage",
     "onnx_file": "AnimalDetector.onnx",

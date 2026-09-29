@@ -119,3 +119,11 @@ python -m pytest tests/ -v
 ## 📄 License
 
 MIT
+
+---
+
+## 🖥️ Proxmox MCP server
+
+`proxmox_mcp/` contains an MCP server that lets Claude manage the Proxmox host
+at `192.168.0.67:8006`. The repo's `.mcp.json` registers it. See
+[`proxmox_mcp/README.md`](proxmox_mcp/README.md) for setup.

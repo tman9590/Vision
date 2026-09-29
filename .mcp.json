@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "proxmox": {
+      "command": "python3",
+      "args": ["-m", "proxmox_mcp.server"],
+      "env": {
+        "PROXMOX_HOST": "${PROXMOX_HOST:-192.168.0.67}",
+        "PROXMOX_PORT": "${PROXMOX_PORT:-8006}",
+        "PROXMOX_TOKEN_ID": "${PROXMOX_TOKEN_ID}",
+        "PROXMOX_TOKEN_SECRET": "${PROXMOX_TOKEN_SECRET}",
+        "PROXMOX_VERIFY_SSL": "${PROXMOX_VERIFY_SSL:-false}",
+        "PROXMOX_ALLOW_WRITE": "${PROXMOX_ALLOW_WRITE:-false}"
+      }
+    }
+  }
+}
